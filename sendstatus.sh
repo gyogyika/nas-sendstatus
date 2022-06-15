@@ -14,7 +14,7 @@ CPU=$(top -b -n1 | awk '/^%Cpu/{print $2$3" "$4$5" "$6$7" "$8$9" "$10$11" "$12$1
 echo "CPU: $CPU"
 
 CPU_load=$(echo "$CPU" | awk '{print $4}' | tr -d id,)
-CPU_load=$(echo $CPU_load | cut -d . -f 1)
+CPU_load=$(echo "$CPU_load" | cut -d . -f 1)
 CPU_load=$((100-CPU_load))
 echo "CPU_load: $CPU_load"
 
