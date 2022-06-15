@@ -76,6 +76,7 @@ curl --get \
   --data-urlencode "DSM_version=$DSM_version" \
   --data-urlencode "CPU_temp=$CPU_TEMP" \
   --data-urlencode "CPU=$CPU" \
+  --data-urlencode "CPU_load=$CPU_load" \
   --data-urlencode "Storage_load=$Storage_load" \
   --data-urlencode "CPU_fan=" \
   --data-urlencode "MB_temp=" \
