@@ -10,11 +10,14 @@ DSM_version="$DSM_ver $DSM_build Update $DSM_update, Model: $NAS_model"
 DSM_version=$(echo "$DSM_version" | tr -d \")
 echo "DSM_version: $DSM_version"
 
-CPU=$(top -b -n1 | awk '/^%Cpu/{print $2$3" "$4$5" "$6$7" "$8$9" "$10$11" "$12$13" "$14$15" "$16$17}')
+CPU=$(top -b -n1 | awk '/^%Cpu/{$1="";print $0}')
 echo "CPU: $CPU"
 
-CPU_load=$(echo "$CPU" | awk '{print $4}' | tr -d id,)
-CPU_load=$(echo "$CPU_load" | cut -d . -f 1)
+CPU_load=$(echo "$CPU" | awk -F, '{print $4}')
+
+# remove decimal point
+CPU_load=$(echo "$CPU_load" | awk -F. '{print $1}')
+
 CPU_load=$((100-CPU_load))
 echo "CPU_load: $CPU_load"
 
@@ -74,7 +77,7 @@ curl --get \
   --data-urlencode "set=nas" \
   --data-urlencode "name=$NAME" \
   --data-urlencode "DSM_version=$DSM_version" \
-  --data-urlencode "CPU_temp=$CPU_TEMP" \
+  --data-urlencode "CPU_temp=$CPU_temp" \
   --data-urlencode "CPU=$CPU" \
   --data-urlencode "CPU_load=$CPU_load" \
   --data-urlencode "Storage_load=$Storage_load" \
@@ -115,4 +118,3 @@ curl --get \
   --data-urlencode "UPS_status=$UPS_status" \
   --data-urlencode "UPS_date=$UPS_date" \
 "$STATUS_URL"
-
