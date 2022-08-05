@@ -73,6 +73,9 @@ echo "Uptime: $Uptime"
 
 TIME=$(date +%s)
 
+SPEEDTEST="invalid"
+read -r SPEEDTEST < "/tmp/SPEEDTEST"
+
 curl --get \
   --data-urlencode "set=nas" \
   --data-urlencode "name=$NAME" \
@@ -81,31 +84,11 @@ curl --get \
   --data-urlencode "CPU=$CPU" \
   --data-urlencode "CPU_load=$CPU_load" \
   --data-urlencode "Storage_load=$Storage_load" \
-  --data-urlencode "CPU_fan=" \
-  --data-urlencode "MB_temp=" \
-  --data-urlencode "GPU_temp=" \
-  --data-urlencode "GPU_load=" \
-  --data-urlencode "GPU_fan=" \
-  --data-urlencode "GPU_fan_load=" \
-  --data-urlencode "SSD1_temp=" \
-  --data-urlencode "SSD1_load=" \
-  --data-urlencode "SSD2_temp=" \
-  --data-urlencode "SSD2_load=" \
   --data-urlencode "HDD1_temp=$HDD1_temp" \
   --data-urlencode "HDD1_Gsense=$HDD1_Gsense" \
-  --data-urlencode "HDD1_load=" \
   --data-urlencode "HDD2_temp=$HDD2_temp" \
   --data-urlencode "HDD2_Gsense=$HDD2_Gsense" \
-  --data-urlencode "HDD2_load=" \
-  --data-urlencode "HDD3_temp=" \
-  --data-urlencode "HDD3_load=" \
   --data-urlencode "Memory_load=$Memory_load" \
-  --data-urlencode "Fan_1=" \
-  --data-urlencode "Fan_2=" \
-  --data-urlencode "Fan_3=" \
-  --data-urlencode "Fan_4=" \
-  --data-urlencode "Fan_5=" \
-  --data-urlencode "VBat=" \
   --data-urlencode "Uptime=$Uptime" \
   --data-urlencode "time=$TIME" \
   --data-urlencode "UPS_model=$UPS_model" \
@@ -117,4 +100,5 @@ curl --get \
   --data-urlencode "UPS_voltage=$UPS_voltage" \
   --data-urlencode "UPS_status=$UPS_status" \
   --data-urlencode "UPS_date=$UPS_date" \
+  --data-urlencode "SPEEDTEST=$SPEEDTEST" \
 "$STATUS_URL"
