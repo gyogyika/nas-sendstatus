@@ -1,6 +1,8 @@
 */1	*	*	*	*	root	/root/cron1minute.sh
 */10	*	*	*	*	root	/root/cron10minute.sh
 0	*	*	*	*	root	/root/cron60minute.sh
+0	0	*	*	7	root	reboot
+
 
 systemctl restart crond
 systemctl restart synoscheduler
