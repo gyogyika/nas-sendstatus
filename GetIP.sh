@@ -8,7 +8,7 @@ echo "GetIP:" "$URL"
 curl --max-time 5 "$URL"
 echo
 
-if [ ! -z "$FREEMYIP" ]
+if [ -n "$FREEMYIP" ]
 then
   echo "freemyip:" "$FREEMYIP"
   curl --max-time 5 "$FREEMYIP"
