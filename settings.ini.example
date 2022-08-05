@@ -1,3 +1,9 @@
 NAME="X-NAS"
 STATUS_URL="https://s.x.x/"
 GETIP_URL="https://"
+FREEMYIP=
+HDD1="/dev/sda"
+HDD2="/dev/sdb"
+IPERF3_SERVER="ping.online.net"
+IPERF3_PORT_FILE="/tmp/iperf3_port"
+SPEEDTEST_URL="https:///speedtest.php"
