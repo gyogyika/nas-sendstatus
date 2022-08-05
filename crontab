@@ -2,6 +2,7 @@
 */10	*	*	*	*	root	/root/cron10minute.sh
 
 systemctl restart crond
+systemctl restart synoscheduler
 
 SynoCommunity
 https://packages.synocommunity.com/
