@@ -1,0 +1,8 @@
+*/1	*	*	*	*	root	/root/cron1minute.sh
+*/10	*	*	*	*	root	/root/cron10minute.sh
+
+systemctl restart crond
+
+SynoCommunity
+https://packages.synocommunity.com/
+SynoCli File Tools
