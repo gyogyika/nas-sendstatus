@@ -11,3 +11,4 @@ SENDMAIL="/root/send-mail.sh"
 SENDMAIL_FROM="$NAME""@x.x"
 SENDMAIL_TO="x@x.x"
 SENDMAIL_URL="https://s.x.x/"
+CURL_TIMEOUT=2
