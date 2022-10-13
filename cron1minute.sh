@@ -1,4 +1,4 @@
 #!/bin/bash
 
-bash /root/sendstatus.sh
-bash /root/SendSavedMails.sh
+bash /volume1/scripts/sendstatus.sh
+bash /volume1/scripts/SendSavedMails.sh

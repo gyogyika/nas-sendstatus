@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source /root/settings.ini
+source /volume1/scripts/settings.ini
 
 echo
 URL="$GETIP_URL"?name="$NAME"

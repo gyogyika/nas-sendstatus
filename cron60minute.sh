@@ -1,3 +1,3 @@
 #!/bin/bash
 
-bash /root/speedtest.sh
+bash /volume1/scripts/speedtest.sh

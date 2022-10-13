@@ -1,10 +1,10 @@
 #!/bin/bash
 
-source /root/settings.ini
+source /volume1/scripts/settings.ini
 
 #sleep 10
 
 $SENDMAIL "NAS started" "$(date)"
 
-bash /root/GetIP.sh
+bash /volume1/scripts/GetIP.sh
 

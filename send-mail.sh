@@ -1,7 +1,7 @@
 #!/bin/bash
 
-source /root/settings.ini
-source /root/send-mail-save.sh
+source /volume1/scripts/settings.ini
+source /volume1/scripts/send-mail-save.sh
 
 if [ -z "$1" ]
 then

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source /root/settings.ini
+source /volume1/scripts/settings.ini
 
 NAS_model=$(awk -F= '/upnpmodelname/ {print $2}' /etc/synoinfo.conf)
 DSM_ver=$(awk -F= '/productversion/ {print $2}' /etc.defaults/VERSION)
