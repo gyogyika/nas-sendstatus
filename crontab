@@ -1,9 +1,9 @@
-*/1	*	*	*	*	root	/root/cron1minute.sh
-*/5	*	*	*	*	root	/root/cron5minute.sh
-*/10	*	*	*	*	root	/root/cron10minute.sh
-0	*	*	*	*	root	/root/cron60minute.sh
+*/1	*	*	*	*	root	/volume1/scripts/cron1minute.sh
+*/5	*	*	*	*	root	/volume1/scripts/cron5minute.sh
+*/10	*	*	*	*	root	/volume1/scripts/cron10minute.sh
+0	*	*	*	*	root	/volume1/scripts/cron60minute.sh
 0	0	*	*	7	root	reboot
-@reboot root	bash /root/StartUp.sh
+@reboot root	bash /volume1/scripts/StartUp.sh
 
 
 systemctl restart crond
@@ -12,3 +12,4 @@ systemctl restart synoscheduler
 SynoCommunity
 https://packages.synocommunity.com/
 SynoCli File Tools
+
