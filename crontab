@@ -1,3 +1,4 @@
+*/1	*	*	*	*	root	/volume1/scripts/pingto.sh
 */1	*	*	*	*	root	/volume1/scripts/cron1minute.sh
 */5	*	*	*	*	root	/volume1/scripts/cron5minute.sh
 */10	*	*	*	*	root	/volume1/scripts/cron10minute.sh
