@@ -76,6 +76,10 @@ TIME=$(date +%s)
 SPEEDTEST="invalid"
 read -r SPEEDTEST < "/tmp/SPEEDTEST"
 
+NOPINGS="invalid"
+read -r NOPINGS < "/tmp/NOPINGS"
+echo NOPINGS: $NOPINGS
+
 curl --get \
   --data-urlencode "set=nas" \
   --data-urlencode "name=$NAME" \
@@ -101,4 +105,5 @@ curl --get \
   --data-urlencode "UPS_status=$UPS_status" \
   --data-urlencode "UPS_date=$UPS_date" \
   --data-urlencode "SPEEDTEST=$SPEEDTEST" \
+  --data-urlencode "NOPINGS=$NOPINGS" \
 "$STATUS_URL"
