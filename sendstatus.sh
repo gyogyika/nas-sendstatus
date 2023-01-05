@@ -34,16 +34,16 @@ fi
 
 echo "HDD temperature SMART attribute: $HDDTEMPATTR"
 
-HDD1_temp=$(smartctl -A --device=sat $HDD1 | awk "/^$HDDTEMPATTR/"'{print $10}')
+HDD1_temp=$(smartctl -A --device=sat "$HDD1" | awk "/^$HDDTEMPATTR/"'{print $10}')
 echo "HDD1_temp: $HDD1_temp"
 
-HDD1_Gsense=$(smartctl -A --device=sat $HDD1 | awk '/^191/{print $10}')
+HDD1_Gsense=$(smartctl -A --device=sat "$HDD1" | awk '/^191/{print $10}')
 echo "HDD1_Gsense: $HDD1_Gsense"
 
-HDD2_temp=$(smartctl -A --device=sat $HDD2 | awk "/^$HDDTEMPATTR/"'{print $10}')
+HDD2_temp=$(smartctl -A --device=sat "$HDD2" | awk "/^$HDDTEMPATTR/"'{print $10}')
 echo "HDD2_temp: $HDD2_temp"
 
-HDD2_Gsense=$(smartctl -A --device=sat $HDD2 | awk '/^191/{print $10}')
+HDD2_Gsense=$(smartctl -A --device=sat "$HDD2" | awk '/^191/{print $10}')
 echo "HDD2_Gsense: $HDD2_Gsense"
 
 UPS=$(upsc ups@localhost)
@@ -85,13 +85,12 @@ read -r SPEEDTEST < "/tmp/SPEEDTEST"
 
 NOPINGS="invalid"
 read -r NOPINGS < "/tmp/NOPINGS"
-echo NOPINGS: $NOPINGS
+echo NOPINGS: "$NOPINGS"
 
 curl --get \
   --data-urlencode "set=nas" \
   --data-urlencode "name=$NAME" \
   --data-urlencode "DSM_version=$DSM_version" \
-  --data-urlencode "CPU_temp=$CPU_temp" \
   --data-urlencode "CPU=$CPU" \
   --data-urlencode "CPU_load=$CPU_load" \
   --data-urlencode "Storage_load=$Storage_load" \
