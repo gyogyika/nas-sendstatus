@@ -27,13 +27,20 @@ echo "Storage_load: $Storage_load"
 Memory_load=$(free -t | awk 'NR==2 {print $3/$2*100}')
 echo "Memory_load: $Memory_load"
 
-HDD1_temp=$(smartctl -A --device=sat $HDD1 | awk '/^194/{print $10}')
+if [ -z "$HDDTEMPATTR" ]
+then
+  HDDTEMPATTR="194"
+fi
+
+echo "HDD temperature SMART attribute: $HDDTEMPATTR"
+
+HDD1_temp=$(smartctl -A --device=sat $HDD1 | awk "/^$HDDTEMPATTR/"'{print $10}')
 echo "HDD1_temp: $HDD1_temp"
 
 HDD1_Gsense=$(smartctl -A --device=sat $HDD1 | awk '/^191/{print $10}')
 echo "HDD1_Gsense: $HDD1_Gsense"
 
-HDD2_temp=$(smartctl -A --device=sat $HDD2 | awk '/^194/{print $10}')
+HDD2_temp=$(smartctl -A --device=sat $HDD2 | awk "/^$HDDTEMPATTR/"'{print $10}')
 echo "HDD2_temp: $HDD2_temp"
 
 HDD2_Gsense=$(smartctl -A --device=sat $HDD2 | awk '/^191/{print $10}')

@@ -4,6 +4,8 @@ GETIP_URL="https://"
 FREEMYIP=
 HDD1="/dev/sda"
 HDD2="/dev/sdb"
+#Airflow_Temperature SMART attribute, default 194
+HDDTEMPATTR="190"
 IPERF3_SERVER="ping.online.net"
 IPERF3_PORT_FILE="/tmp/iperf3_port"
 SPEEDTEST_URL="https:///speedtest.php"
