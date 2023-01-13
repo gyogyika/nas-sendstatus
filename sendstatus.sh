@@ -3,10 +3,12 @@
 source /volume1/scripts/settings.ini
 
 NAS_model=$(awk -F= '/upnpmodelname/ {print $2}' /etc/synoinfo.conf)
+NAS_model=$(echo "$NAS_model" | tr -d \")
+echo "NAS_model: $NAS_model"
 DSM_ver=$(awk -F= '/productversion/ {print $2}' /etc.defaults/VERSION)
 DSM_build=$(awk -F= '/buildnumber/ {print $2}' /etc.defaults/VERSION)
 DSM_update=$(awk -F= '/smallfixnumber/ {print $2}' /etc.defaults/VERSION)
-DSM_version="$DSM_ver $DSM_build Update $DSM_update, Model: $NAS_model"
+DSM_version="$DSM_ver $DSM_build Update $DSM_update"
 DSM_version=$(echo "$DSM_version" | tr -d \")
 echo "DSM_version: $DSM_version"
 
@@ -90,6 +92,7 @@ echo NOPINGS: "$NOPINGS"
 curl --get \
   --data-urlencode "set=nas" \
   --data-urlencode "name=$NAME" \
+  --data-urlencode "NAS_model=$NAS_model" \
   --data-urlencode "DSM_version=$DSM_version" \
   --data-urlencode "CPU=$CPU" \
   --data-urlencode "CPU_load=$CPU_load" \
