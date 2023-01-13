@@ -23,6 +23,10 @@ CPU_load=$(echo "$CPU_load" | awk -F. '{print $1}')
 CPU_load=$((100-CPU_load))
 echo "CPU_load: $CPU_load"
 
+CPU_temp=$(awk '/CPU_Temperature/ {print $5}' /var/run/hwmon/cpu_temperature.json)
+CPU_temp=$(echo "$CPU_temp" | tr -d \")
+echo "CPU_temp: $CPU_temp"
+
 Storage_load=$(df -h | awk '/volume/ {print $5}')
 echo "Storage_load: $Storage_load"
 
@@ -96,6 +100,7 @@ curl --get \
   --data-urlencode "DSM_version=$DSM_version" \
   --data-urlencode "CPU=$CPU" \
   --data-urlencode "CPU_load=$CPU_load" \
+  --data-urlencode "CPU_temp=$CPU_temp" \
   --data-urlencode "Storage_load=$Storage_load" \
   --data-urlencode "HDD1_temp=$HDD1_temp" \
   --data-urlencode "HDD1_Gsense=$HDD1_Gsense" \
