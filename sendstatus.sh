@@ -37,20 +37,53 @@ if [ -z "$HDDTEMPATTR" ]
 then
   HDDTEMPATTR="194"
 fi
-
 echo "HDD temperature SMART attribute: $HDDTEMPATTR"
 
-HDD1_temp=$(smartctl -A --device=sat "$HDD1" | awk "/^$HDDTEMPATTR/"'{print $10}')
-echo "HDD1_temp: $HDD1_temp"
+if [ -z "$SSDWEARLCATTR" ]
+then
+  SSDWEARLCATTR="177"
+fi
+echo "SSD Wear_Leveling_Count SMART attribute: $SSDWEARLCATTR"
 
-HDD1_Gsense=$(smartctl -A --device=sat "$HDD1" | awk '/^191/{print $10}')
-echo "HDD1_Gsense: $HDD1_Gsense"
+if [ -n "$HDD1" ]
+then
+  HDD1_temp=$(smartctl -A --device=sat "$HDD1" | awk "/^$HDDTEMPATTR/"'{print $10}')
+  echo "HDD1_temp: $HDD1_temp"
+  HDD1_Gsense=$(smartctl -A --device=sat "$HDD1" | awk '/^191/{print $10}')
+  echo "HDD1_Gsense: $HDD1_Gsense"
+fi
 
-HDD2_temp=$(smartctl -A --device=sat "$HDD2" | awk "/^$HDDTEMPATTR/"'{print $10}')
-echo "HDD2_temp: $HDD2_temp"
+if [ -n "$HDD2" ]
+then
+  HDD2_temp=$(smartctl -A --device=sat "$HDD2" | awk "/^$HDDTEMPATTR/"'{print $10}')
+  echo "HDD2_temp: $HDD2_temp"
+  HDD2_Gsense=$(smartctl -A --device=sat "$HDD2" | awk '/^191/{print $10}')
+  echo "HDD2_Gsense: $HDD2_Gsense"
+fi
 
-HDD2_Gsense=$(smartctl -A --device=sat "$HDD2" | awk '/^191/{print $10}')
-echo "HDD2_Gsense: $HDD2_Gsense"
+if [ -n "$SSD1" ]
+then
+  SSD1_temp=$(smartctl -A --device=sat "$SSD1" | awk "/^$HDDTEMPATTR/"'{print $10}')
+  echo "SSD1_temp: $SSD1_temp"
+  SSD1_wear_lc=$(smartctl -A --device=sat "$SSD1" | awk "/^$SSDWEARLCATTR/"'{print $10}')
+  if [ "$SSD1_wear_lc" == 0 ]
+    then
+      SSD1_wear_lc="zero"
+  fi
+  echo "SSD1_wear_lc: $SSD1_wear_lc"
+fi
+
+if [ -n "$SSD2" ]
+then
+  SSD2_temp=$(smartctl -A --device=sat "$SSD2" | awk "/^$HDDTEMPATTR/"'{print $10}')
+  echo "SSD2_temp: $SSD2_temp"
+  SSD2_wear_lc=$(smartctl -A --device=sat "$SSD2" | awk "/^$SSDWEARLCATTR/"'{print $10}')
+  if [ "$SSD2_wear_lc" == 0 ]
+    then
+      SSD2_wear_lc="zero"
+  fi
+  echo "SSD2_wear_lc: $SSD2_wear_lc"
+fi
 
 UPS=$(upsc ups@localhost)
 
@@ -109,6 +142,10 @@ curl --get \
   --data-urlencode "HDD1_Gsense=$HDD1_Gsense" \
   --data-urlencode "HDD2_temp=$HDD2_temp" \
   --data-urlencode "HDD2_Gsense=$HDD2_Gsense" \
+  --data-urlencode "SSD1_temp=$SSD1_temp" \
+  --data-urlencode "SSD1_wear_lc=$SSD1_wear_lc" \
+  --data-urlencode "SSD2_temp=$SSD2_temp" \
+  --data-urlencode "SSD2_wear_lc=$SSD2_wear_lc" \
   --data-urlencode "Memory_load=$Memory_load" \
   --data-urlencode "Uptime=$Uptime" \
   --data-urlencode "time=$TIME" \
