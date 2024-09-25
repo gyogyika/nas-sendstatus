@@ -33,6 +33,9 @@ echo "Storage_load: $Storage_load"
 Memory_load=$(free -t | awk 'NR==2 {print $3/$2*100}')
 echo "Memory_load: $Memory_load"
 
+PING=$(ping -c1 www.msftncsi.com | awk -F/ '{print $5}')
+echo PING: $PING
+
 if [ -z "$HDDTEMPATTR" ]
 then
   HDDTEMPATTR="194"
@@ -149,6 +152,7 @@ curl --get \
   --data-urlencode "Memory_load=$Memory_load" \
   --data-urlencode "Uptime=$Uptime" \
   --data-urlencode "time=$TIME" \
+  --data-urlencode "PING=$PING" \
   --data-urlencode "UPS_model=$UPS_model" \
   --data-urlencode "UPS_battery_date=$UPS_battery_date" \
   --data-urlencode "UPS_battery_charge=$UPS_battery_charge" \

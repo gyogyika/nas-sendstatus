@@ -1,3 +1,3 @@
 #!/bin/bash
 
-bash /volume1/scripts/GetIP.sh
+bash /volume1/scripts/freemyip.sh
