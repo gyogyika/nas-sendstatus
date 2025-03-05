@@ -27,7 +27,7 @@ CPU_temp=$(awk '/CPU_Temperature/ {print $5}' /var/run/hwmon/cpu_temperature.jso
 CPU_temp=$(echo "$CPU_temp" | tr -d \")
 echo "CPU_temp: $CPU_temp"
 
-Storage_load=$(df -h | awk '/volume/ {print $5}')
+Storage_load=$(df -h /volume1/ | awk '/volume1/ {print $5}')
 echo "Storage_load: $Storage_load"
 
 Memory_load=$(free -t | awk 'NR==2 {print $3/$2*100}')
