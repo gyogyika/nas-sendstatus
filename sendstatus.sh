@@ -12,6 +12,10 @@ DSM_version="$DSM_ver $DSM_build Update $DSM_update"
 DSM_version=$(echo "$DSM_version" | tr -d \")
 echo "DSM_version: $DSM_version"
 
+NASMONITORINGVER="invalid"
+read -r NASMONITORINGVER < "nasmonitoringver"
+echo NASMONITORINGVER: $NASMONITORINGVER
+
 CPU=$(top -b -n1 | awk '/^%Cpu/{$1="";print $0}')
 echo "CPU: $CPU"
 
@@ -191,4 +195,5 @@ curl --get \
   --data-urlencode "SPEEDTEST=$SPEEDTEST" \
   --data-urlencode "NOPINGS=$NOPINGS" \
   --data-urlencode "VPNCERTEXP=$VPNCERTEXP" \
+  --data-urlencode "NASMONITORINGVER=$NASMONITORINGVER" \
 "$STATUS_URL"
