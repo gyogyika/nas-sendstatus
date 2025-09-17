@@ -13,7 +13,7 @@ DSM_version=$(echo "$DSM_version" | tr -d \")
 echo "DSM_version: $DSM_version"
 
 NASMONITORINGVER="invalid"
-read -r NASMONITORINGVER < "nasmonitoringver"
+read -r NASMONITORINGVER < "/volume1/scripts/nasmonitoringver"
 echo NASMONITORINGVER: $NASMONITORINGVER
 
 CPU=$(top -b -n1 | awk '/^%Cpu/{$1="";print $0}')
