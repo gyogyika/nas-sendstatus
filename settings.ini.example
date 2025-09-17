@@ -25,3 +25,4 @@ SENDMAIL_URL="https://s.x.x/"
 CURL_TIMEOUT=2
 SLEEP=1
 #UPS_battery_date="2022/08/12"
+VPNCERT="/usr/syno/etc/certificate/system/default/syno-ca-cert.pem"

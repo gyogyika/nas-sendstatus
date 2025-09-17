@@ -123,6 +123,27 @@ echo "UPS_date: $UPS_date"
 Uptime=$(awk '/^btime/{print $2}' /proc/stat)
 echo "Uptime: $Uptime"
 
+if [ -n "$VPNCERT" ]
+then
+  CERT_EXP=$(openssl x509 -enddate -noout -in "$VPNCERT" | awk -F'=' '{print $2}')
+  echo "VPN cert expiration Not After: ""$CERT_EXP"
+
+  CERT_EXP_DAY=$(echo "$CERT_EXP" | awk '{print $2}')
+  #echo "$CERT_EXP_DAY"
+
+  CERT_EXP_MONTH_NAME=$(echo "$CERT_EXP" | awk '{print $1}')
+  #echo "$CERT_EXP_MONTH_NAME"
+
+  CERT_EXP_MONTH=$(echo "$CERT_EXP_MONTH_NAME" | awk '{printf "%01d",(index("JanFebMarAprMayJunJulAugSepOctNovDec",$0)+2)/3}')
+  #echo "$CERT_EXP_MONTH"
+
+  CERT_EXP_YEAR=$(echo "$CERT_EXP" | awk '{print $4}')
+  #echo "$CERT_EXP_YEAR"
+
+  VPNCERTEXP=$CERT_EXP_DAY.$CERT_EXP_MONTH.$CERT_EXP_YEAR
+  echo "VPN cert expiration: ""$VPNCERTEXP"
+fi
+
 TIME=$(date +%s)
 
 SPEEDTEST="invalid"
@@ -164,4 +185,5 @@ curl --get \
   --data-urlencode "UPS_date=$UPS_date" \
   --data-urlencode "SPEEDTEST=$SPEEDTEST" \
   --data-urlencode "NOPINGS=$NOPINGS" \
+  --data-urlencode "VPNCERTEXP=$VPNCERTEXP" \
 "$STATUS_URL"
