@@ -123,6 +123,10 @@ echo "UPS_date: $UPS_date"
 Uptime=$(awk '/^btime/{print $2}' /proc/stat)
 echo "Uptime: $Uptime"
 
+VPNRESULTFILE="/tmp/ovpn_status_2_result"
+VPNCLIENTS=$(awk -F, '/^CLIENT_LIST/ {print $2", "$3", "$4}' "$VPNRESULTFILE")
+echo "VPNCLIENTS: $VPNCLIENTS"
+
 if [ -n "$VPNCERT" ]
 then
   CERT_EXP=$(openssl x509 -enddate -noout -in "$VPNCERT" | awk -F'=' '{print $2}')
@@ -174,6 +178,7 @@ curl --get \
   --data-urlencode "Uptime=$Uptime" \
   --data-urlencode "time=$TIME" \
   --data-urlencode "PING=$PING" \
+  --data-urlencode "VPNCLIENTS=$VPNCLIENTS" \
   --data-urlencode "UPS_model=$UPS_model" \
   --data-urlencode "UPS_battery_date=$UPS_battery_date" \
   --data-urlencode "UPS_battery_charge=$UPS_battery_charge" \
